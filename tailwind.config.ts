@@ -41,9 +41,14 @@ const config: Config = {
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       boxShadow: {
-        glow: "0 0 60px -12px rgb(var(--brand) / 0.55)",
-        card: "0 12px 40px -16px rgba(0,0,0,0.7)",
-        lift: "0 20px 50px -20px rgb(var(--brand) / 0.35)",
+        glow: "0 0 0 1px rgb(var(--brand) / 0.35), 0 8px 22px -12px rgb(var(--brand) / 0.5)",
+        card: "var(--shadow-card)",
+        pop: "var(--shadow-pop)",
+        lift: "0 18px 44px -22px rgb(var(--brand) / 0.4)",
+      },
+      borderRadius: {
+        card: "var(--r-card)",
+        btn: "var(--r-btn)",
       },
       keyframes: {
         "fade-up": {

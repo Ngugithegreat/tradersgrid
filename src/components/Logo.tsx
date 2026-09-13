@@ -1,8 +1,9 @@
 import { LOGO_FROM, LOGO_TO } from "@/lib/brand";
 
 export function Logo({ className = "h-8 w-8" }: { className?: string }) {
-  // SinTrades mark: a rising sine wave ("Sin") — the curve of a volatility
-  // index — inside a soft violet tile, with a live-price node at the crest.
+  // TradersGrid mark: a precision grid (the "Grid") with a rising trade line
+  // and a live node at the crest — an azure brokerage tile. Deliberately
+  // geometric and institutional, distinct from a sine-wave / blob look.
   return (
     <svg
       className={className}
@@ -11,39 +12,29 @@ export function Logo({ className = "h-8 w-8" }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
     >
-      <rect width="32" height="32" rx="9" fill="url(#stg)" />
-      <rect
-        width="32"
-        height="32"
-        rx="9"
-        fill="url(#stgloss)"
-        fillOpacity="0.35"
-      />
-      {/* faint trailing wave for depth */}
+      <rect width="32" height="32" rx="8" fill="url(#tg)" />
+      <rect width="32" height="32" rx="8" fill="url(#tgloss)" fillOpacity="0.3" />
+      {/* precision grid */}
+      <g stroke="#fff" strokeOpacity="0.22" strokeWidth="1">
+        <path d="M11 5v22M21 5v22M5 11h22M5 21h22" />
+      </g>
+      {/* rising trade line across the grid */}
       <path
-        d="M4 20.5c2.7 0 3.4-6 6-6s3.4 9 6 9 3.4-8 6-8"
+        d="M6 22 L13 16 L18 19 L26 9"
         stroke="#fff"
-        strokeOpacity="0.18"
-        strokeWidth="2.2"
+        strokeWidth="2.4"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* primary sine wave, trending up */}
-      <path
-        d="M4 18.5C6.6 18.5 7.6 11.5 10.5 11.5S14.3 21 17.5 21 21 14 24 13.6"
-        stroke="#fff"
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="24" cy="13.6" r="2.6" fill="#fff" />
-      <circle cx="24" cy="13.6" r="2.6" fill="url(#stg)" fillOpacity="0.15" />
+      {/* live node at the crest */}
+      <circle cx="26" cy="9" r="2.7" fill="#fff" />
+      <circle cx="26" cy="9" r="2.7" fill="url(#tg)" fillOpacity="0.2" />
       <defs>
-        <linearGradient id="stg" x1="0" y1="0" x2="32" y2="32">
+        <linearGradient id="tg" x1="0" y1="0" x2="32" y2="32">
           <stop stopColor={LOGO_FROM} />
           <stop offset="1" stopColor={LOGO_TO} />
         </linearGradient>
-        <linearGradient id="stgloss" x1="16" y1="0" x2="16" y2="32">
+        <linearGradient id="tgloss" x1="16" y1="0" x2="16" y2="32">
           <stop stopColor="#fff" />
           <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
           <stop offset="1" stopColor="#000" stopOpacity="0.12" />

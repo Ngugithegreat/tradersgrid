@@ -2,21 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Themeable tokens as RGB channels so Tailwind opacity modifiers work. */
+/* ==========================================================================
+   TradersGrid — "Institutional premium" design system.
+   Deep slate/navy base, azure accent, hairline borders, a faint precision-grid
+   texture, restrained soft depth and tabular figures. Tokens are RGB channels
+   so Tailwind opacity modifiers keep working. Light + dark.
+   ========================================================================== */
 :root {
-  --bg: 10 11 16;
-  --surface: 18 19 27;
-  --surface2: 26 28 39;
-  --border: 38 42 56;
-  --muted: 138 144 166;
-  --fg: 232 236 245;
-  --input: 12 14 22;
-  --sheen: rgba(255, 255, 255, 0.03);
-  --ghost: rgba(255, 255, 255, 0.04);
-  --ghost-hover: rgba(255, 255, 255, 0.07);
-  --grid: #1a2030;
-  --aurora1: rgba(124, 92, 255, 0.16);
-  --aurora2: rgba(59, 130, 246, 0.1);
+  /* Deep slate/navy — a trading-desk night palette, cooler & flatter than a blob hero. */
+  --bg: 9 12 20;
+  --surface: 15 20 31;
+  --surface2: 21 27 41;
+  --border: 32 41 58;
+  --hairline: 44 55 76;
+  --muted: 133 145 170;
+  --fg: 233 238 247;
+  --input: 12 16 26;
+  --sheen: rgba(255, 255, 255, 0.025);
+  --ghost: rgba(255, 255, 255, 0.045);
+  --ghost-hover: rgba(255, 255, 255, 0.08);
+  --grid: rgba(120, 150, 200, 0.05);
+  --grid-strong: rgba(120, 150, 200, 0.09);
+  --aurora1: rgba(46, 124, 246, 0.14);
+  --aurora2: rgba(46, 124, 246, 0.07);
+  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.03) inset, 0 18px 44px -28px rgba(0, 0, 0, 0.85);
+  --shadow-pop: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+  /* Institutional radii — medium, precise, never bubbly. */
+  --r-card: 12px;
+  --r-btn: 8px;
+  --r-input: 9px;
   /* Brand accent (RGB channels) — drives every brand colour in the app. */
   --brand: 46 124 246;
   --brand-dark: 30 99 233;
@@ -33,19 +47,23 @@ html.brand-alt {
 }
 
 :root.light {
-  --bg: 239 242 248;
+  --bg: 240 243 249;
   --surface: 255 255 255;
-  --surface2: 240 243 249;
-  --border: 224 228 238;
-  --muted: 100 112 133;
-  --fg: 17 24 39;
-  --input: 246 248 252;
-  --sheen: rgba(255, 255, 255, 0.5);
-  --ghost: rgba(15, 20, 35, 0.04);
-  --ghost-hover: rgba(15, 20, 35, 0.08);
-  --grid: #e6e9f2;
-  --aurora1: rgba(124, 92, 255, 0.1);
-  --aurora2: rgba(59, 130, 246, 0.07);
+  --surface2: 244 247 252;
+  --border: 223 229 240;
+  --hairline: 210 218 232;
+  --muted: 94 106 128;
+  --fg: 16 23 39;
+  --input: 247 249 253;
+  --sheen: rgba(255, 255, 255, 0.6);
+  --ghost: rgba(15, 27, 55, 0.035);
+  --ghost-hover: rgba(15, 27, 55, 0.07);
+  --grid: rgba(40, 70, 130, 0.05);
+  --grid-strong: rgba(40, 70, 130, 0.08);
+  --aurora1: rgba(46, 124, 246, 0.09);
+  --aurora2: rgba(46, 124, 246, 0.05);
+  --shadow-card: 0 1px 2px 0 rgba(16, 23, 39, 0.04), 0 12px 30px -20px rgba(16, 23, 39, 0.22);
+  --shadow-pop: 0 24px 50px -26px rgba(16, 23, 39, 0.28);
   color-scheme: light;
 }
 
@@ -58,11 +76,26 @@ body {
 }
 
 body {
+  /* A restrained institutional ground: a faint precision grid + a cool azure
+     wash top-right, no coloured blobs. */
   background-image:
-    radial-gradient(1000px 560px at 82% -12%, var(--aurora1), transparent 60%),
-    radial-gradient(760px 460px at -5% 8%, var(--aurora2), transparent 60%),
-    radial-gradient(600px 500px at 50% 120%, var(--aurora1), transparent 60%);
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    radial-gradient(1100px 620px at 88% -14%, var(--aurora1), transparent 62%),
+    radial-gradient(820px 520px at -8% 4%, var(--aurora2), transparent 60%);
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
   background-attachment: fixed;
+}
+
+/* Reusable faint grid texture for panels/sections. */
+.grid-texture {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+.hairline {
+  border-color: rgb(var(--hairline));
 }
 
 * {
@@ -90,11 +123,27 @@ body {
 .card {
   position: relative;
   background:
-    linear-gradient(180deg, var(--sheen), transparent 42%),
+    linear-gradient(180deg, var(--sheen), transparent 40%),
     rgb(var(--surface));
   border: 1px solid rgb(var(--border));
-  border-radius: 18px;
-  box-shadow: 0 12px 40px -20px rgba(0, 0, 0, 0.55);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
+}
+/* A framed "terminal" panel — crisper border, hairline top accent, faint grid. */
+.panel-frame {
+  position: relative;
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--hairline));
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.panel-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgb(var(--brand) / 0.7), transparent);
 }
 
 .btn {
@@ -103,7 +152,7 @@ body {
   justify-content: center;
   gap: 8px;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: var(--r-btn);
   transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease,
     box-shadow 0.2s ease;
   cursor: pointer;
@@ -119,13 +168,22 @@ body {
 }
 
 .btn-brand {
-  background: linear-gradient(180deg, rgb(var(--brand-light)), rgb(var(--brand-dark)));
+  background: linear-gradient(180deg, rgb(var(--brand-light)), rgb(var(--brand)) 55%, rgb(var(--brand-dark)));
   color: #fff;
-  box-shadow: 0 8px 24px -10px rgb(var(--brand) / 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 18px -8px rgb(var(--brand) / 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 .btn-brand:hover:not(:disabled) {
-  filter: brightness(1.07);
+  filter: brightness(1.06);
+}
+/* Solid, flat azure — the primary institutional CTA. */
+.btn-solid {
+  background: rgb(var(--brand));
+  color: #fff;
+  box-shadow: 0 6px 18px -10px rgb(var(--brand) / 0.7);
+}
+.btn-solid:hover:not(:disabled) {
+  background: rgb(var(--brand-dark));
 }
 
 .btn-ghost {
@@ -141,7 +199,7 @@ body {
   width: 100%;
   background: rgb(var(--input));
   border: 1px solid rgb(var(--border));
-  border-radius: 12px;
+  border-radius: var(--r-input);
   padding: 12px 14px;
   color: rgb(var(--fg));
   outline: none;
@@ -157,10 +215,20 @@ body {
 
 .tabular {
   font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Uppercase micro-label used above section titles and on stat cards. */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--brand));
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, rgb(var(--brand-light)), rgb(var(--brand)) 40%, #5b8def);
+  background: linear-gradient(90deg, rgb(var(--brand-light)), rgb(var(--brand)) 55%, rgb(var(--brand-dark)));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -170,6 +238,7 @@ body {
 .panel {
   background: var(--ghost);
   border: 1px solid rgb(var(--border));
+  border-radius: var(--r-input);
 }
 }
 

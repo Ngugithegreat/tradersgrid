@@ -227,11 +227,14 @@ export function Nav() {
                   <Link
                     key={l.href}
                     href={l.href}
-                    className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition ${
-                      active ? "bg-surface2 text-fg" : "text-muted hover:text-fg"
+                    className={`relative flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition ${
+                      active ? "text-fg" : "text-muted hover:text-fg"
                     }`}
                   >
-                    <Icon className="h-4 w-4" />
+                    {active && (
+                      <span className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-brand" />
+                    )}
+                    <Icon className={`h-4 w-4 ${active ? "text-brand" : ""}`} />
                     {l.label}
                   </Link>
                 );

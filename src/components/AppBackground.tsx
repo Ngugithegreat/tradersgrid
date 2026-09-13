@@ -6,30 +6,28 @@ import { BRAND_RGB } from "@/lib/brand";
 export function AppBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* colour mesh */}
+      {/* restrained azure wash — top corners only, no pink */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
-            `radial-gradient(60% 45% at 15% 0%, rgba(${BRAND_RGB},0.22), transparent 60%),` +
-            "radial-gradient(55% 45% at 100% 20%, rgb(91 141 239 / 0.18), transparent 60%)," +
-            "radial-gradient(50% 50% at 50% 100%, rgb(236 72 153 / 0.10), transparent 65%)",
+            `radial-gradient(58% 42% at 12% -4%, rgba(${BRAND_RGB},0.14), transparent 60%),` +
+            `radial-gradient(52% 42% at 100% 12%, rgba(${BRAND_RGB},0.09), transparent 62%)`,
         }}
       />
-      {/* faint grid, masked to fade toward the middle */}
+      {/* faint precision grid, masked to fade toward the middle */}
       <div
-        className="absolute inset-0 opacity-[0.6]"
+        className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(rgb(var(--border) / 0.7) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--border) / 0.7) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-          maskImage: "radial-gradient(ellipse 100% 60% at 50% -10%, #000 30%, transparent 78%)",
-          WebkitMaskImage: "radial-gradient(ellipse 100% 60% at 50% -10%, #000 30%, transparent 78%)",
+            "linear-gradient(var(--grid-strong) 1px, transparent 1px), linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+          maskImage: "radial-gradient(ellipse 110% 65% at 50% -12%, #000 28%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(ellipse 110% 65% at 50% -12%, #000 28%, transparent 80%)",
         }}
       />
-      {/* glowing orbs */}
-      <div className="absolute -top-40 left-[12%] h-[36rem] w-[36rem] rounded-full bg-brand/15 blur-[120px]" />
-      <div className="absolute top-1/4 -right-40 h-[32rem] w-[32rem] rounded-full bg-indigo-500/15 blur-[120px]" />
+      {/* a single soft azure glow, top-left */}
+      <div className="absolute -top-40 left-[10%] h-[34rem] w-[34rem] rounded-full bg-brand/10 blur-[130px]" />
 
       {/* subtle upward market line along the bottom */}
       <svg

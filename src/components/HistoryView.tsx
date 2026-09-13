@@ -66,7 +66,9 @@ export function HistoryView() {
       {tab === "trades" ? (
         <div className="card overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-5 py-3">
-            <span className="font-bold">Trade history</span>
+            <span className="flex items-center gap-2 font-bold">
+              <span className="h-4 w-1 rounded-full bg-brand" /> Trade history
+            </span>
             <div className="flex flex-wrap gap-1">
               {FILTERS.map(([f, label]) => (
                 <button
@@ -95,7 +97,9 @@ export function HistoryView() {
         </div>
       ) : (
         <div className="card overflow-hidden">
-          <div className="border-b border-border px-5 py-3 font-bold">Transactions</div>
+          <div className="flex items-center gap-2 border-b border-border px-5 py-3 font-bold">
+            <span className="h-4 w-1 rounded-full bg-brand" /> Transactions
+          </div>
           {txns.length === 0 ? (
             <div className="p-8 text-center text-sm text-muted">No deposits or withdrawals yet.</div>
           ) : (
