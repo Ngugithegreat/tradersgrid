@@ -67,14 +67,13 @@ export default function Landing() {
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,#000_60%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,#000_60%,transparent)]"
         >
-          <div className="grid-texture absolute inset-0 opacity-70" />
-          <div className="absolute -right-32 -top-24 h-[30rem] w-[30rem] rounded-full bg-brand/10 blur-[120px]" />
+          <div className="grid-texture absolute inset-0 opacity-40" />
         </div>
 
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-14 pt-14 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
-          <div className="animate-fade-up">
+          <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1 text-xs font-medium text-muted">
-              <span className="flex h-1.5 w-1.5 rounded-full bg-up animate-pulseSoft" />
+              <span className="flex h-1.5 w-1.5 rounded-full  bg-up" />
               Live market data · settled on the real feed
             </span>
             <h1 className="mt-5 text-4xl font-black leading-[1.04] tracking-tight sm:text-5xl lg:text-[3.4rem]">
@@ -111,7 +110,7 @@ export default function Landing() {
           </div>
 
           {/* Framed "terminal" panel around the live chart */}
-          <div className="animate-fade-up [animation-delay:120ms]">
+          <div>
             <div className="panel-frame">
               <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
                 <div className="flex items-center gap-2 text-xs font-semibold text-muted">
